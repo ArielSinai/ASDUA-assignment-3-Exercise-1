@@ -62,9 +62,18 @@ def compute_reward(prev_state, curr_state, events):
 
     # Terminal
     if events.get("winner") == "me":
-        reward += 120.0
+        reward += 5.0 * 24.0
     elif events.get("winner") == "enemy":
-        reward -= 120.0
+        reward -= 5.0 * 24.0
+    
+    # HP diff (priority 3)
+    my_hp_prev = me0["hp"]
+    enemy_hp_prev = en0["hp"]
+    my_hp_curr = me1["hp"]
+    enemy_hp_curr = en1["hp"]
+
+    hp_diff = (enemy_hp_prev - enemy_hp_curr) - (my_hp_prev - my_hp_curr)
+    reward += 3.0 * hp_diff
 
     # HP delta shaping (dense and stable)
     # Positive if we improved HP diff this step.

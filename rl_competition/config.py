@@ -20,11 +20,11 @@ EPS_DECAY = 0.999  # unused when EPS_DECAY_STEPS > 0
 EPS_DECAY_STEPS = 4000  # reach EPS_END around episode ~4000
 
 # DQN
-TARGET_UPDATE_FREQ = 1500  # NOTE: in train.py this is in *steps* (global_step)
+TARGET_UPDATE_FREQ = 3000  # NOTE: in train.py this is in *steps* (global_step)
 TRAIN_FREQ = 1
 
 # Rendering
-USE_PYGAME_RENDER = False
+USE_PYGAME_RENDER = True
 
 # Checkpoints
 CHECKPOINT_DIR = "checkpoints"
@@ -35,3 +35,8 @@ MODEL_CONFIG_PATH = "checkpoints/model_config.json"
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 if torch.backends.mps.is_available():
     DEVICE = "mps"
+
+# Reward shaping weights
+REWARD_W_STEP = 1.0
+REWARD_W_GOOD = 3.0
+REWARD_W_CRITICAL = 5.0
